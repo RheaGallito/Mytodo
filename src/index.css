@@ -1,0 +1,679 @@
+/* index.css - Main stylesheet for Todo List application */
+
+/* CSS Variables for theming */
+:root {
+  /* Color palette - Light theme */
+  --primary-color: #4361ee;
+  --primary-hover: #3a56d4;
+  --secondary-color: #4cc9f0;
+  --success-color: #4caf50;
+  --warning-color: #ff9800;
+  --danger-color: #f44336;
+  --light-color: #f8f9fa;
+  --dark-color: #343a40;
+  --gray-color: #6c757d;
+  
+  /* Background and text colors */
+  --bg-color: #ffffff;
+  --text-color: #212529;
+  --text-muted: #6c757d;
+  
+  /* Component colors */
+  --card-bg: #ffffff;
+  --input-bg: #f8f9fa;
+  --border-color: #dee2e6;
+  --hover-bg: #f1f3f5;
+  
+  /* Priority colors */
+  --priority-high-bg: #ffebee;
+  --priority-high-text: #c62828;
+  --priority-medium-bg: #fff8e1;
+  --priority-medium-text: #f57f17;
+  --priority-low-bg: #e8f5e9;
+  --priority-low-text: #2e7d32;
+  
+  /* Notification colors */
+  --notification-success-bg: rgba(76, 175, 80, 0.9);
+  --notification-danger-bg: rgba(244, 67, 54, 0.9);
+  --notification-warning-bg: rgba(255, 152, 0, 0.9);
+  --notification-text: #ffffff;
+  
+  /* Effects */
+  --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.15);
+  --transition: all 0.3s ease;
+  --border-radius: 6px;
+}
+
+/* Dark theme variables */
+body.dark-mode {
+  --primary-color: #4cc9f0;
+  --primary-hover: #3db8df;
+  --secondary-color: #6366f1;
+  
+  /* Background and text colors */
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --text-muted: #9e9e9e;
+  
+  /* Component colors */
+  --card-bg: #1e1e1e;
+  --input-bg: #2d2d2d;
+  --border-color: #444444;
+  --hover-bg: #333333;
+  
+  /* Priority colors */
+  --priority-high-bg: #4a1c1c;
+  --priority-high-text: #ff8a80;
+  --priority-medium-bg: #4d3c00;
+  --priority-medium-text: #ffe082;
+  --priority-low-bg: #1b3e1b;
+  --priority-low-text: #a5d6a7;
+}
+
+/* Base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 1rem;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  transition: var(--transition);
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+input, textarea, select {
+  font-family: inherit;
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* App layout */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-header {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow);
+}
+
+.app-main {
+  flex: 1;
+  padding: 2rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.app-footer {
+  background-color: var(--primary-color);
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-top: auto;
+}
+
+/* Todo container */
+.todo-container {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  transition: var(--transition);
+}
+
+.todo-header {
+  margin-bottom: 1.5rem;
+}
+
+.todo-header h2 {
+  color: var(--primary-color);
+}
+
+/* Form styles */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background-color: var(--input-bg);
+  color: var(--text-color);
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* Button styles */
+.btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: var(--border-radius);
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn:hover {
+  background-color: var(--primary-hover);
+}
+
+.btn-secondary {
+  background-color: var(--secondary-color);
+}
+
+.btn-success {
+  background-color: var(--success-color);
+}
+
+.btn-warning {
+  background-color: var(--warning-color);
+}
+
+.btn-danger {
+  background-color: var(--danger-color);
+}
+
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 1rem;
+}
+
+.btn-lg {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+/* Task item styles */
+.task-item {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--border-color);
+  transition: var(--transition);
+}
+
+.task-item:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.task-item.completed {
+  opacity: 0.7;
+  border-left-color: var(--success-color);
+}
+
+.task-item.overdue {
+  border-left-color: var(--danger-color);
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.task-checkbox {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.task-title {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.completed .task-title {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+.task-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.task-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--border-radius);
+}
+
+.task-btn:hover {
+  background-color: var(--hover-bg);
+}
+
+.task-details {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+/* Priority badges */
+.priority-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.priority-high {
+  background-color: var(--priority-high-bg);
+  color: var(--priority-high-text);
+}
+
+.priority-medium {
+  background-color: var(--priority-medium-bg);
+  color: var(--priority-medium-text);
+}
+
+.priority-low {
+  background-color: var(--priority-low-bg);
+  color: var(--priority-low-text);
+}
+
+/* Category badge */
+.category-badge {
+  display: inline-block;
+  background-color: var(--secondary-color);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+}
+
+/* Notifications */
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 300px;
+  max-width: 400px;
+  z-index: 1000;
+  box-shadow: var(--shadow-lg);
+  animation: slideIn 0.3s ease;
+  color: var(--notification-text);
+}
+
+.notification.success {
+  background-color: var(--notification-success-bg);
+}
+
+.notification.danger {
+  background-color: var(--notification-danger-bg);
+}
+
+.notification.warning {
+  background-color: var(--notification-warning-bg);
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-left: 1rem;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Filters */
+.filters-container {
+  background-color: var(--input-bg);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.filters-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.quick-filters {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.filter-btn {
+  background: none;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  color: var(--text-color);
+  font-size: 1rem;
+}
+
+.filter-btn.active {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.filters-panel {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.filters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+/* Task form */
+.task-form-container {
+  background-color: var(--input-bg);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.task-form-container h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.submit-btn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.submit-btn:hover {
+  background-color: var(--primary-hover);
+}
+
+.cancel-btn {
+  background-color: var(--gray-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.form-error {
+  background-color: var(--priority-high-bg);
+  color: var(--priority-high-text);
+  padding: 0.75rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 1rem;
+}
+
+/* Login/Register */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+}
+
+.auth-card {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  padding: 2rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.auth-card h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+}
+
+.toggle-form {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.toggle-btn:hover {
+  text-decoration: underline;
+}
+
+/* Utility classes */
+.text-center {
+  text-align: center;
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.mt-1 { margin-top: 0.25rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 1rem; }
+.mt-4 { margin-top: 1.5rem; }
+.mt-5 { margin-top: 3rem; }
+
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 1rem; }
+.mb-4 { margin-bottom: 1.5rem; }
+.mb-5 { margin-bottom: 3rem; }
+
+.p-1 { padding: 0.25rem; }
+.p-2 { padding: 0.5rem; }
+.p-3 { padding: 1rem; }
+.p-4 { padding: 1.5rem; }
+.p-5 { padding: 3rem; }
+
+.d-flex { display: flex; }
+.flex-column { flex-direction: column; }
+.justify-content-between { justify-content: space-between; }
+.align-items-center { align-items: center; }
+.flex-wrap { flex-wrap: wrap; }
+.gap-1 { gap: 0.25rem; }
+.gap-2 { gap: 0.5rem; }
+.gap-3 { gap: 1rem; }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .task-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  
+  .task-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  
+  .filters-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .quick-filters {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .notification {
+    min-width: auto;
+    width: calc(100% - 40px);
+    top: 10px;
+    right: 10px;
+    left: 10px;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .app-header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .header-controls {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 1rem;
+  }
+  
+  .app-main {
+    padding: 1rem 0.5rem;
+  }
+  
+  .todo-container {
+    padding: 1rem;
+  }
+  
+  .task-form-container,
+  .filters-container {
+    padding: 1rem;
+  }
+}
